@@ -127,6 +127,9 @@
     <Compile Include="NavigationSidebar.xaml.cs">
       <DependentUpon>NavigationSidebar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProviderCrudxaml.xaml.cs">
+      <DependentUpon>ProviderCrudxaml.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WarehouseCRUD.xaml.cs">
       <DependentUpon>WarehouseCRUD.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NavigationSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProviderCrudxaml.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

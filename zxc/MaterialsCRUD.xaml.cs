@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using zxc.ADO;
+using System.Windows.Media.Media3D;
 
 namespace zxc
 {
@@ -22,8 +24,8 @@ namespace zxc
     /// </summary>
     public partial class MaterialsCRUD : Page
     {
-         
-        private string connectionString = "Server=sql-ser-larisa\\serv1215;Database=Строй Компания И закупка материалов;Integrated Security=True;";
+
+        private string connectionString = "Server=DESKTOP-LQ2LR6H\\MSSQLSERVER01;Database=Строй Компания И закупка материалов;Integrated Security=True;";
         private DataTable materialsTable;
 
         public MaterialsCRUD()
@@ -85,6 +87,11 @@ namespace zxc
             {
                 MessageBox.Show("Выберите материал для удаления.");
             }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

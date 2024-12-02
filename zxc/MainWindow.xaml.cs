@@ -38,7 +38,7 @@ namespace zxc
         {
             InitializeComponent();
             _instance = this;
-            Framesidebar_2.NavigationService.Navigate(new WarehouseCRUD());
+            Framesidebar_2.NavigationService.Navigate(new ProviderCrudxaml());
             framesidebar.NavigationService.Navigate(new NavigationSidebar());
            
             

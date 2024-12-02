@@ -12,24 +12,23 @@
         <ListView Name="WarehouseListView" Margin="10,10,10,50">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID Склада" DisplayMemberBinding="{Binding ID_warehouse}" Width="50"/>
+                    <GridViewColumn Header="ID Склада" DisplayMemberBinding="{Binding ID_warehouse}" Width="65"/>
                     <GridViewColumn Header="ID Материала" DisplayMemberBinding="{Binding ID_material}" Width="150"/>
-                    <GridViewColumn Header="Количество материала" DisplayMemberBinding="{Binding Quantity_of_material}" Width="100"/>
+                    <GridViewColumn Header="Количество материала" DisplayMemberBinding="{Binding Quantity_of_material}" Width="150"/>
                     <GridViewColumn Header="Адресс" DisplayMemberBinding="{Binding Adress}" Width="75"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <TextBox x:Name="ID_Material" Margin="102,323,527,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Quantity_of_material" Margin="298,323,371,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Adress" Margin="446,322,191,0" VerticalAlignment="Top" />
 
-        <TextBox x:Name="ID_Sklad" Margin="35,323,567,0" VerticalAlignment="Top" />
-        <TextBox x:Name="ID_Material" Margin="233,323,396,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Quantity_of_material" Margin="404,323,265,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Adress" Margin="535,323,102,0" VerticalAlignment="Top" />
-
-        <Button Content="Добавить" Width="75" Margin="540,350,185,0" VerticalAlignment="Top" Click="AddButton_Click"/>
-        <Button Content="Удалить" Width="75" Margin="623,350,102,0" VerticalAlignment="Top" Click="DeleteButton_Click"/>
-        <Label Content="ID Склад" HorizontalAlignment="Left" Height="24" Margin="97,294,0,0" VerticalAlignment="Top" Width="80"/>
-        <Label Content="ID Материала" HorizontalAlignment="Left" Height="28" Margin="273,293,0,0" VerticalAlignment="Top" Width="103"/>
-        <Label Content="Количество материала" HorizontalAlignment="Left" Height="30" Margin="402,293,0,0" VerticalAlignment="Top" Width="136"/>
-        <Label Content="Адресс" HorizontalAlignment="Left" Height="30" Margin="574,291,0,0" VerticalAlignment="Top" Width="94"/>
+       
+        <Button x:Name="Deletewh" Content="Удалить" Width="75" Margin="623,350,102,0" VerticalAlignment="Top" Click="DeleteButton_Click"/>
+        <Label Content="ID Материала" HorizontalAlignment="Left" Height="28" Margin="142,288,0,0" VerticalAlignment="Top" Width="103"/>
+        <Label Content="Количество материала" HorizontalAlignment="Left" Height="30" Margin="298,287,0,0" VerticalAlignment="Top" Width="136"/>
+        <Label Content="Адресс" HorizontalAlignment="Left" Height="30" Margin="496,288,0,0" VerticalAlignment="Top" Width="63"/>
+        <Button x:Name="addbuttonclickWH" Content="Добавить" Width="75" Margin="543,350,182,0" VerticalAlignment="Top" Click="AddButton_Click"/>
+        <Button Content="Редактировать" Margin="446,350,265,0" VerticalAlignment="Top" Click="EditButton_Click"/>
     </Grid>
 </Page>

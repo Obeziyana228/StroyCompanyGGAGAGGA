@@ -25,7 +25,7 @@
         <TextBox Name="CategoryTextBox" Margin="285,323,379,0" VerticalAlignment="Top"/>
         <TextBox Name="PriceTextBox" Margin="421,323,260,0" VerticalAlignment="Top"/>
         <TextBox Name="SalePriceTextBox" Margin="540,323,102,0" VerticalAlignment="Top" />
-
+        <Button Content="Редактировать" Click="EditButton_Click" Width="89" Margin="446,350,265,81"/>
         <Button Content="Добавить" Width="75" Margin="540,350,185,0" VerticalAlignment="Top" Click="AddButton_Click"/>
         <Button Content="Удалить" Width="75" Margin="623,350,102,0" VerticalAlignment="Top" Click="DeleteButton_Click"/>
         <Label Content="Название материала" HorizontalAlignment="Left" Height="24" Margin="97,294,0,0" VerticalAlignment="Top" Width="126"/>

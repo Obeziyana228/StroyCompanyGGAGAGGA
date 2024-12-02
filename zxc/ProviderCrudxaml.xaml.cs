@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,80 +15,78 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Media.Media3D;
-using zxc.ADO;
 
 namespace zxc
 {
     /// <summary>
-    /// Логика взаимодействия для WarehouseCRUD.xaml
+    /// Логика взаимодействия для ProviderCrudxaml.xaml
     /// </summary>
-    public partial class WarehouseCRUD : Page
+    public partial class ProviderCrudxaml : Page
     {
-
         private string connectionString = "Server=DESKTOP-LQ2LR6H\\MSSQLSERVER01;Database=Строй Компания И закупка материалов;Integrated Security=True;";
-        private DataTable WarehouseTable;
+        private DataTable ProviderTable;
 
-        public WarehouseCRUD()
+        public ProviderCrudxaml()
         {
             InitializeComponent();
-            LoadWarehouse();
+            LoadProvider();
         }
 
-        private void LoadWarehouse()
+        private void LoadProvider()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Warehouse", connection);
-                WarehouseTable = new DataTable();
-                adapter.Fill(WarehouseTable);
-                WarehouseListView.ItemsSource = WarehouseTable.DefaultView;
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Provider", connection);
+                ProviderTable = new DataTable();
+                adapter.Fill(ProviderTable);
+
+                ProvidersListView.ItemsSource = ProviderTable.DefaultView;
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void DobavitButton_Click(object sender, RoutedEventArgs e)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "INSERT INTO Warehouse (ID_material, Quantity_of_material, Adress) VALUES (@ID_material, @Quantity_of_material, @Adress)";
+                string query = "INSERT INTO Provider (Name_Postavshik, reliability, phone) VALUES (@Name_Postavshik, @reliability, @phone)";
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@ID_material", ID_Material.Text);
-                command.Parameters.AddWithValue("@Quantity_of_material",Quantity_of_material.Text);
-                command.Parameters.AddWithValue("@Adress", Adress.Text);
+                command.Parameters.AddWithValue("@Name_Postavshik", Name_Postavshik.Text);
+                command.Parameters.AddWithValue("@reliability", reliability.Text);
+                command.Parameters.AddWithValue("@phone", phone.Text);
 
                 connection.Open();
                 command.ExecuteNonQuery();
             }
-            LoadWarehouse();
-        }
+            LoadProvider();
+        }//z gbljh
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void UdaltButton_Click(object sender, RoutedEventArgs e)
         {
-            if (WarehouseListView.SelectedItem != null)
+            if (ProvidersListView.SelectedItem != null)
             {
-                DataRowView selectedRow = (DataRowView)WarehouseListView.SelectedItem;
-                int id = (int)selectedRow["ID_warehouse"]; 
+                DataRowView selectedRow = (DataRowView)ProvidersListView.SelectedItem;
+                int id = (int)selectedRow["ID_Postavshik"];
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Warehouse WHERE ID_warehouse = @ID"; 
+                    string query = "DELETE FROM Provider WHERE ID_Postavshik = @ID";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@ID", id);
 
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
-                LoadWarehouse();
+                LoadProvider();
             }
             else
             {
-                MessageBox.Show("Выберите Склад для удаления.");
+                MessageBox.Show("Выберите Поставщика для удаления.");
             }
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-        
+
         }
     }
 }
