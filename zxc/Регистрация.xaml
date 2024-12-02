@@ -1,0 +1,40 @@
+﻿<Page x:Class="zxc.Регистрация"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:zxc"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Регистрация">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="UsernameTextBox" Margin="48,99,44,323" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" TextChanged="UsernameTextBox_TextChanged" >
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-6.34"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-2.889"/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <PasswordBox x:Name="PasswordBox" Margin="47,141,48,274" Grid.ColumnSpan="2" Height="35"/>
+        <PasswordBox x:Name="ConfirmPasswordBox" Margin="47,191,48,231" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" >
+            <PasswordBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </PasswordBox.RenderTransform>
+        </PasswordBox>
+        <Button x:Name="RegisterButton" Content="Зарегистрироваться" Click="RegisterButton_Click" Margin="20,284,20,144" Height="22" Grid.ColumnSpan="2"/>
+        <Button x:Name="RegistrationButton" Content="Вход" Click="RegistrationButton_Click" Margin="20,247,20,182" Grid.ColumnSpan="2"/>
+    </Grid>
+</Page>

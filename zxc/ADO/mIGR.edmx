@@ -1,0 +1,808 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_material" />
+          </Key>
+          <Property Name="ID_material" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_material" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="construction site">
+          <Key>
+            <PropertyRef Name="ID_construction_site" />
+          </Key>
+          <Property Name="ID_construction_site" Type="int" Nullable="false" />
+          <Property Name="Name_site" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="inventory">
+          <Key>
+            <PropertyRef Name="ID_Inventory" />
+          </Key>
+          <Property Name="ID_Inventory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_warehouse" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="ID_klient" />
+          </Key>
+          <Property Name="ID_klient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Klient" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_number" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="klient_Order">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Klient" Type="int" />
+          <Property Name="ID_material" Type="int" />
+          <Property Name="total_Cost" Type="float" />
+          <Property Name="Date_of_order" Type="date" />
+          <Property Name="date_of_arrival" Type="date" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Warehouse" Type="int" />
+        </EntityType>
+        <EntityType Name="Logistika">
+          <Key>
+            <PropertyRef Name="ID_movement" />
+          </Key>
+          <Property Name="ID_movement" Type="int" Nullable="false" />
+          <Property Name="ID_Material" Type="int" />
+          <Property Name="ID_warehouse" Type="int" />
+          <Property Name="ID_site" Type="int" />
+          <Property Name="date_movement" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="Cost" Type="int" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="ID_Materials" />
+          </Key>
+          <Property Name="ID_Materials" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Maerials" Type="nvarchar" MaxLength="50" />
+          <Property Name="Сategory" Type="int" />
+          <Property Name="purchase_price" Type="float" />
+          <Property Name="sale_price" Type="float" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID_Postavshik" />
+          </Key>
+          <Property Name="ID_Postavshik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Postavshik" Type="nvarchar" MaxLength="50" />
+          <Property Name="reliability" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Supply_order">
+          <Key>
+            <PropertyRef Name="ID_supply" />
+          </Key>
+          <Property Name="ID_supply" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Provider" Type="int" />
+          <Property Name="ID_material" Type="int" />
+          <Property Name="total_cost" Type="float" />
+          <Property Name="Date_order" Type="date" />
+          <Property Name="Date_arrival" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Warehouse" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID_warehouse" />
+          </Key>
+          <Property Name="ID_warehouse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_material" Type="int" />
+          <Property Name="Quantity_of_material" Type="int" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_inventory_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="ID_warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klient_Order_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
+          <End Role="klient_Order" Type="Self.klient_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="ID_klient" />
+            </Principal>
+            <Dependent Role="klient_Order">
+              <PropertyRef Name="ID_Klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klient_Order_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="klient_Order" Type="Self.klient_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="klient_Order">
+              <PropertyRef Name="ID_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klient_Order_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="klient_Order" Type="Self.klient_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="klient_Order">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logistika_construction site">
+          <End Role="construction site" Type="Self.construction site" Multiplicity="0..1" />
+          <End Role="Logistika" Type="Self.Logistika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="construction site">
+              <PropertyRef Name="ID_construction_site" />
+            </Principal>
+            <Dependent Role="Logistika">
+              <PropertyRef Name="ID_site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logistika_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="Logistika" Type="Self.Logistika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="Logistika">
+              <PropertyRef Name="ID_Material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logistika_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Logistika" Type="Self.Logistika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="Logistika">
+              <PropertyRef Name="ID_warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Materials_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_material" />
+            </Principal>
+            <Dependent Role="Materials">
+              <PropertyRef Name="Сategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_order_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="Supply_order" Type="Self.Supply_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="Supply_order">
+              <PropertyRef Name="ID_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_order_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="Supply_order" Type="Self.Supply_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID_Postavshik" />
+            </Principal>
+            <Dependent Role="Supply_order">
+              <PropertyRef Name="ID_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_order_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Supply_order" Type="Self.Supply_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="Supply_order">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouse_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="ID_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="construction site" EntityType="Self.construction site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inventory" EntityType="Self.inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="klient_Order" EntityType="Self.klient_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logistika" EntityType="Self.Logistika" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supply_order" EntityType="Self.Supply_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_inventory_Warehouse" Association="Self.FK_inventory_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="inventory" EntitySet="inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klient_Order_Klient" Association="Self.FK_klient_Order_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="klient_Order" EntitySet="klient_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klient_Order_Materials" Association="Self.FK_klient_Order_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="klient_Order" EntitySet="klient_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klient_Order_Warehouse" Association="Self.FK_klient_Order_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="klient_Order" EntitySet="klient_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logistika_construction site" Association="Self.FK_Logistika_construction site">
+            <End Role="construction site" EntitySet="construction site" />
+            <End Role="Logistika" EntitySet="Logistika" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logistika_Materials" Association="Self.FK_Logistika_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Logistika" EntitySet="Logistika" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logistika_Warehouse" Association="Self.FK_Logistika_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Logistika" EntitySet="Logistika" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Materials_Category" Association="Self.FK_Materials_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_order_Materials" Association="Self.FK_Supply_order_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Supply_order" EntitySet="Supply_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_order_Provider" Association="Self.FK_Supply_order_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Supply_order" EntitySet="Supply_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_order_Warehouse" Association="Self.FK_Supply_order_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Supply_order" EntitySet="Supply_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouse_Materials" Association="Self.FK_Warehouse_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_material" />
+          </Key>
+          <Property Name="ID_material" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_material" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK_Materials_Category" FromRole="Category" ToRole="Materials" />
+        </EntityType>
+        <EntityType Name="construction_site">
+          <Key>
+            <PropertyRef Name="ID_construction_site" />
+          </Key>
+          <Property Name="ID_construction_site" Type="Int32" Nullable="false" />
+          <Property Name="Name_site" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Logistika" Relationship="Self.FK_Logistika_construction_site" FromRole="construction_site" ToRole="Logistika" />
+        </EntityType>
+        <EntityType Name="inventory">
+          <Key>
+            <PropertyRef Name="ID_Inventory" />
+          </Key>
+          <Property Name="ID_Inventory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_warehouse" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_inventory_Warehouse" FromRole="inventory" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="ID_klient" />
+          </Key>
+          <Property Name="ID_klient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Klient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="klient_Order" Relationship="Self.FK_klient_Order_Klient" FromRole="Klient" ToRole="klient_Order" />
+        </EntityType>
+        <EntityType Name="klient_Order">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Klient" Type="Int32" />
+          <Property Name="ID_material" Type="Int32" />
+          <Property Name="total_Cost" Type="Double" />
+          <Property Name="Date_of_order" Type="DateTime" Precision="0" />
+          <Property Name="date_of_arrival" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Warehouse" Type="Int32" />
+          <NavigationProperty Name="Klient" Relationship="Self.FK_klient_Order_Klient" FromRole="klient_Order" ToRole="Klient" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK_klient_Order_Materials" FromRole="klient_Order" ToRole="Materials" />
+          <NavigationProperty Name="Warehouse1" Relationship="Self.FK_klient_Order_Warehouse" FromRole="klient_Order" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Logistika">
+          <Key>
+            <PropertyRef Name="ID_movement" />
+          </Key>
+          <Property Name="ID_movement" Type="Int32" Nullable="false" />
+          <Property Name="ID_Material" Type="Int32" />
+          <Property Name="ID_warehouse" Type="Int32" />
+          <Property Name="ID_site" Type="Int32" />
+          <Property Name="date_movement" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="Cost" Type="Int32" />
+          <NavigationProperty Name="construction_site" Relationship="Self.FK_Logistika_construction_site" FromRole="Logistika" ToRole="construction_site" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK_Logistika_Materials" FromRole="Logistika" ToRole="Materials" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_Logistika_Warehouse" FromRole="Logistika" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="ID_Materials" />
+          </Key>
+          <Property Name="ID_Materials" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Maerials" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Сategory" Type="Int32" />
+          <Property Name="purchase_price" Type="Double" />
+          <Property Name="sale_price" Type="Double" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Materials_Category" FromRole="Materials" ToRole="Category" />
+          <NavigationProperty Name="klient_Order" Relationship="Self.FK_klient_Order_Materials" FromRole="Materials" ToRole="klient_Order" />
+          <NavigationProperty Name="Logistika" Relationship="Self.FK_Logistika_Materials" FromRole="Materials" ToRole="Logistika" />
+          <NavigationProperty Name="Supply_order" Relationship="Self.FK_Supply_order_Materials" FromRole="Materials" ToRole="Supply_order" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_Warehouse_Materials" FromRole="Materials" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID_Postavshik" />
+          </Key>
+          <Property Name="ID_Postavshik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Postavshik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reliability" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Supply_order" Relationship="Self.FK_Supply_order_Provider" FromRole="Provider" ToRole="Supply_order" />
+        </EntityType>
+        <EntityType Name="Supply_order">
+          <Key>
+            <PropertyRef Name="ID_supply" />
+          </Key>
+          <Property Name="ID_supply" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Provider" Type="Int32" />
+          <Property Name="ID_material" Type="Int32" />
+          <Property Name="total_cost" Type="Double" />
+          <Property Name="Date_order" Type="DateTime" Precision="0" />
+          <Property Name="Date_arrival" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Warehouse" Type="Int32" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK_Supply_order_Materials" FromRole="Supply_order" ToRole="Materials" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_Supply_order_Provider" FromRole="Supply_order" ToRole="Provider" />
+          <NavigationProperty Name="Warehouse1" Relationship="Self.FK_Supply_order_Warehouse" FromRole="Supply_order" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="ID_warehouse" />
+          </Key>
+          <Property Name="ID_warehouse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_material" Type="Int32" />
+          <Property Name="Quantity_of_material" Type="Int32" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="inventory" Relationship="Self.FK_inventory_Warehouse" FromRole="Warehouse" ToRole="inventory" />
+          <NavigationProperty Name="klient_Order" Relationship="Self.FK_klient_Order_Warehouse" FromRole="Warehouse" ToRole="klient_Order" />
+          <NavigationProperty Name="Logistika" Relationship="Self.FK_Logistika_Warehouse" FromRole="Warehouse" ToRole="Logistika" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK_Warehouse_Materials" FromRole="Warehouse" ToRole="Materials" />
+          <NavigationProperty Name="Supply_order" Relationship="Self.FK_Supply_order_Warehouse" FromRole="Warehouse" ToRole="Supply_order" />
+        </EntityType>
+        <Association Name="FK_Materials_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Materials" Type="Self.Materials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_material" />
+            </Principal>
+            <Dependent Role="Materials">
+              <PropertyRef Name="Сategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logistika_construction_site">
+          <End Role="construction_site" Type="Self.construction_site" Multiplicity="0..1" />
+          <End Role="Logistika" Type="Self.Logistika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="construction_site">
+              <PropertyRef Name="ID_construction_site" />
+            </Principal>
+            <Dependent Role="Logistika">
+              <PropertyRef Name="ID_site" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inventory_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="ID_warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klient_Order_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
+          <End Role="klient_Order" Type="Self.klient_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="ID_klient" />
+            </Principal>
+            <Dependent Role="klient_Order">
+              <PropertyRef Name="ID_Klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klient_Order_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="klient_Order" Type="Self.klient_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="klient_Order">
+              <PropertyRef Name="ID_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_klient_Order_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="klient_Order" Type="Self.klient_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="klient_Order">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logistika_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="Logistika" Type="Self.Logistika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="Logistika">
+              <PropertyRef Name="ID_Material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logistika_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Logistika" Type="Self.Logistika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="Logistika">
+              <PropertyRef Name="ID_warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_order_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="Supply_order" Type="Self.Supply_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="Supply_order">
+              <PropertyRef Name="ID_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouse_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="ID_Materials" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="ID_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_order_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="Supply_order" Type="Self.Supply_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID_Postavshik" />
+            </Principal>
+            <Dependent Role="Supply_order">
+              <PropertyRef Name="ID_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_order_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Supply_order" Type="Self.Supply_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="ID_warehouse" />
+            </Principal>
+            <Dependent Role="Supply_order">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Строй_Компания_И_закупка_материаловEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="construction_site" EntityType="Self.construction_site" />
+          <EntitySet Name="inventory" EntityType="Self.inventory" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" />
+          <EntitySet Name="klient_Order" EntityType="Self.klient_Order" />
+          <EntitySet Name="Logistika" EntityType="Self.Logistika" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" />
+          <EntitySet Name="Supply_order" EntityType="Self.Supply_order" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" />
+          <AssociationSet Name="FK_Materials_Category" Association="Self.FK_Materials_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Materials" EntitySet="Materials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logistika_construction_site" Association="Self.FK_Logistika_construction_site">
+            <End Role="construction_site" EntitySet="construction_site" />
+            <End Role="Logistika" EntitySet="Logistika" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inventory_Warehouse" Association="Self.FK_inventory_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="inventory" EntitySet="inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klient_Order_Klient" Association="Self.FK_klient_Order_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="klient_Order" EntitySet="klient_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klient_Order_Materials" Association="Self.FK_klient_Order_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="klient_Order" EntitySet="klient_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_klient_Order_Warehouse" Association="Self.FK_klient_Order_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="klient_Order" EntitySet="klient_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logistika_Materials" Association="Self.FK_Logistika_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Logistika" EntitySet="Logistika" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logistika_Warehouse" Association="Self.FK_Logistika_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Logistika" EntitySet="Logistika" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_order_Materials" Association="Self.FK_Supply_order_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Supply_order" EntitySet="Supply_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouse_Materials" Association="Self.FK_Warehouse_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_order_Provider" Association="Self.FK_Supply_order_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Supply_order" EntitySet="Supply_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_order_Warehouse" Association="Self.FK_Supply_order_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Supply_order" EntitySet="Supply_order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Строй_Компания_И_закупка_материаловEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID_material" ColumnName="ID_material" />
+                <ScalarProperty Name="Name_material" ColumnName="Name_material" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="construction_site">
+            <EntityTypeMapping TypeName="Model.construction_site">
+              <MappingFragment StoreEntitySet="construction site">
+                <ScalarProperty Name="ID_construction_site" ColumnName="ID_construction_site" />
+                <ScalarProperty Name="Name_site" ColumnName="Name_site" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventory">
+            <EntityTypeMapping TypeName="Model.inventory">
+              <MappingFragment StoreEntitySet="inventory">
+                <ScalarProperty Name="ID_Inventory" ColumnName="ID_Inventory" />
+                <ScalarProperty Name="ID_warehouse" ColumnName="ID_warehouse" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klient">
+            <EntityTypeMapping TypeName="Model.Klient">
+              <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="ID_klient" ColumnName="ID_klient" />
+                <ScalarProperty Name="Name_Klient" ColumnName="Name_Klient" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="klient_Order">
+            <EntityTypeMapping TypeName="Model.klient_Order">
+              <MappingFragment StoreEntitySet="klient_Order">
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="ID_Klient" ColumnName="ID_Klient" />
+                <ScalarProperty Name="ID_material" ColumnName="ID_material" />
+                <ScalarProperty Name="total_Cost" ColumnName="total_Cost" />
+                <ScalarProperty Name="Date_of_order" ColumnName="Date_of_order" />
+                <ScalarProperty Name="date_of_arrival" ColumnName="date_of_arrival" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logistika">
+            <EntityTypeMapping TypeName="Model.Logistika">
+              <MappingFragment StoreEntitySet="Logistika">
+                <ScalarProperty Name="ID_movement" ColumnName="ID_movement" />
+                <ScalarProperty Name="ID_Material" ColumnName="ID_Material" />
+                <ScalarProperty Name="ID_warehouse" ColumnName="ID_warehouse" />
+                <ScalarProperty Name="ID_site" ColumnName="ID_site" />
+                <ScalarProperty Name="date_movement" ColumnName="date_movement" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="Model.Materials">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="ID_Materials" ColumnName="ID_Materials" />
+                <ScalarProperty Name="Name_Maerials" ColumnName="Name_Maerials" />
+                <ScalarProperty Name="Сategory" ColumnName="Сategory" />
+                <ScalarProperty Name="purchase_price" ColumnName="purchase_price" />
+                <ScalarProperty Name="sale_price" ColumnName="sale_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provider">
+            <EntityTypeMapping TypeName="Model.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="ID_Postavshik" ColumnName="ID_Postavshik" />
+                <ScalarProperty Name="Name_Postavshik" ColumnName="Name_Postavshik" />
+                <ScalarProperty Name="reliability" ColumnName="reliability" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supply_order">
+            <EntityTypeMapping TypeName="Model.Supply_order">
+              <MappingFragment StoreEntitySet="Supply_order">
+                <ScalarProperty Name="ID_supply" ColumnName="ID_supply" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+                <ScalarProperty Name="ID_material" ColumnName="ID_material" />
+                <ScalarProperty Name="total_cost" ColumnName="total_cost" />
+                <ScalarProperty Name="Date_order" ColumnName="Date_order" />
+                <ScalarProperty Name="Date_arrival" ColumnName="Date_arrival" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouse">
+            <EntityTypeMapping TypeName="Model.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="ID_warehouse" ColumnName="ID_warehouse" />
+                <ScalarProperty Name="ID_material" ColumnName="ID_material" />
+                <ScalarProperty Name="Quantity_of_material" ColumnName="Quantity_of_material" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

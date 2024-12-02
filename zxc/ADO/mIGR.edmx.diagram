@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8ba3d9b8aa9c4e2bbbcb533a56a1022d" Name="Diagram1" ZoomLevel="58">
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.construction_site" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.inventory" Width="1.5" PointX="7.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Klient" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.klient_Order" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Logistika" Width="1.5" PointX="10.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Materials" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Provider" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Supply_order" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Warehouse" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Materials_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Logistika_construction_site" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_inventory_Warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klient_Order_Klient" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klient_Order_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_klient_Order_Warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Logistika_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Logistika_Warehouse" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Supply_order_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Warehouse_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Supply_order_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Supply_order_Warehouse" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
