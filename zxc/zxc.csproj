@@ -121,8 +121,14 @@
       <DependentUpon>mIGR.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\ZXCZXCZXC.cs" />
+    <Compile Include="MaterialsCRUD.xaml.cs">
+      <DependentUpon>MaterialsCRUD.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NavigationSidebar.xaml.cs">
       <DependentUpon>NavigationSidebar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseCRUD.xaml.cs">
+      <DependentUpon>WarehouseCRUD.xaml</DependentUpon>
     </Compile>
     <Compile Include="Вход.xaml.cs">
       <DependentUpon>Вход.xaml</DependentUpon>
@@ -142,7 +148,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MaterialsCRUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NavigationSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WarehouseCRUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

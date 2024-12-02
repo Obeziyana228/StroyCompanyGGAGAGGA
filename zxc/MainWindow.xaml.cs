@@ -38,8 +38,10 @@ namespace zxc
         {
             InitializeComponent();
             _instance = this;
+            Framesidebar_2.NavigationService.Navigate(new WarehouseCRUD());
             framesidebar.NavigationService.Navigate(new NavigationSidebar());
-            Framesidebar_2.NavigationService.Navigate(new Вход());
+           
+            
         }
     }
 }
