@@ -13,10 +13,10 @@ namespace zxc.ADO
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Строй_Компания_И_закупка_материаловEntities : DbContext
+    public partial class Строй_Компания_И_закупка_материаловEntities1 : DbContext
     {
-        public Строй_Компания_И_закупка_материаловEntities()
-            : base("name=Строй_Компания_И_закупка_материаловEntities")
+        public Строй_Компания_И_закупка_материаловEntities1()
+            : base("name=Строй_Компания_И_закупка_материаловEntities1")
         {
         }
     

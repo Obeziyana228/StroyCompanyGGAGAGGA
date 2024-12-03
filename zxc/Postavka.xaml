@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:zxc"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       x:Class="zxc.Reestr"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1670"
@@ -63,6 +64,9 @@
         <Label Content="Статус" FontWeight="Bold" Margin="0,0,0,5"/>
         <TextBox x:Name="StatusTextBox" Margin="0,0,0,10"/>
 
+        <Label Content="Количетсво материала" FontWeight="Bold"/>
+        <TextBox x:Name="Quantity_of_materials"  TextChanged="QuantityTextBox_TextChanged"/>
+
         <Button Content="Добавить" Click="AddSupplyOrder_Click" Width="75" Margin="0,0,0,10"/>
         <Button x:Name="DeleteSupplyOrderButton" Content="Удалить" Click="DeleteSupplyOrderButton_Click" Width="82" />
 
@@ -79,9 +83,11 @@
                     <GridViewColumn Header="Дата прибытия" DisplayMemberBinding="{Binding Date_arrival}" Width="100"/>
                     <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Status}" Width="100"/>
                     <GridViewColumn Header="ID Склада" DisplayMemberBinding="{Binding Warehouse}" Width="100"/>
+                    <GridViewColumn Header="Количество материала" DisplayMemberBinding="{Binding Warehouse}" Width="150"/>
                     <!-- Новый столбец для ID_warehouse -->
                 </GridView>
             </ListView.View>
         </ListView>
+        <ui:BreadcrumbBarItem Content="BreadcrumbBarItem"/>
     </StackPanel>
 </Page>

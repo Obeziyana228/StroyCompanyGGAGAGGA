@@ -92,6 +92,7 @@
           <Property Name="Date_arrival" Type="date" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="Warehouse" Type="int" />
+          <Property Name="Quantity_of_material" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -425,6 +426,7 @@
           <Property Name="Date_arrival" Type="DateTime" Precision="0" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Warehouse" Type="Int32" />
+          <Property Name="Quantity_of_material" Type="Int32" />
           <NavigationProperty Name="Materials" Relationship="Self.FK_Supply_order_Materials" FromRole="Supply_order" ToRole="Materials" />
           <NavigationProperty Name="Provider" Relationship="Self.FK_Supply_order_Provider" FromRole="Supply_order" ToRole="Provider" />
           <NavigationProperty Name="Warehouse1" Relationship="Self.FK_Supply_order_Warehouse" FromRole="Supply_order" ToRole="Warehouse" />
@@ -597,7 +599,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Строй_Компания_И_закупка_материаловEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Строй_Компания_И_закупка_материаловEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="construction_site" EntityType="Self.construction_site" />
           <EntitySet Name="inventory" EntityType="Self.inventory" />
@@ -663,7 +665,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Строй_Компания_И_закупка_материаловEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Строй_Компания_И_закупка_материаловEntities1">
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="Model.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -758,6 +760,7 @@
                 <ScalarProperty Name="Date_arrival" ColumnName="Date_arrival" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Quantity_of_material" ColumnName="Quantity_of_material" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

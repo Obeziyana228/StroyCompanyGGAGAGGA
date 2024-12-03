@@ -22,10 +22,11 @@ namespace zxc
     /// </summary>
     public partial class Reestr : Page
     {
-        private string connectionString = "Server=sql-ser-larisa\\serv1215;Database=Строй Компания И закупка материалов;Integrated Security=True;";
+        private string connectionString = "Server = DESKTOP-LQ2LR6H\\MSSQLSERVER01;Database=Строй Компания И закупка материалов;Integrated Security=True;";
         public Reestr()
         {
             InitializeComponent();
+            Quantity_of_materials.IsEnabled = false;
             LoadData();
         }
         private int selectedMaterialId = -1; // Для выбранного материала
@@ -37,7 +38,6 @@ namespace zxc
             {
                 var selectedProvider = ProvidersListView.SelectedItem as Provider;
                 selectedProviderId = selectedProvider.ID_Postavshik;
-                MessageBox.Show($"Выбран поставщик: {selectedProvider.Name_Postavshik}, ID: {selectedProviderId}");
             }
             else
             {
@@ -66,10 +66,7 @@ namespace zxc
                                 phone = reader["phone"].ToString()
                             });
                         }
-                        ProvidersListView.ItemsSource = providers; // Обновляем источник данных
-
-                        // Отладочное сообщение
-                        MessageBox.Show($"Загружено поставщиков: {providers.Count}");
+                        ProvidersListView.ItemsSource = providers; // Обновляем источник 
                     }
                 }
             }
@@ -212,28 +209,26 @@ namespace zxc
             if (MaterialsListView.SelectedItem is Material selectedMaterial)
             {
                 selectedMaterialId = selectedMaterial.ID_Materials;
-                UpdateTotalCost();
+                MessageBox.Show(Convert.ToString(selectedMaterialId));
+                Quantity_of_materials.IsEnabled = true;
             }
         }
 
-  
+
 
         private void UpdateTotalCost()
         {
-            if (selectedMaterialId != -1 && selectedWarehouseId != -1)
-            {
-                // Получаем цену материала
-                float purchasePrice = GetMaterialPrice(selectedMaterialId);
-                // Получаем количество на складе
-                int quantity = GetWarehouseQuantity(selectedWarehouseId);
 
-                // Вычисляем стоимость
-                float totalCost = purchasePrice * quantity;
-                TotalCostTextBox.Text = totalCost.ToString();
+            if (selectedMaterialId > 0 && selectedWarehouseId > 0)
+            {
+
             }
             else
             {
-                TotalCostTextBox.Clear();
+                var mat = ZXCZXCZXC.dbo.Materials.FirstOrDefault(G =>G.ID_Materials == selectedMaterialId);
+                int price = Convert.ToInt32(mat.purchase_price);
+                float totalCost = price * Convert.ToInt32(Quantity_of_materials.Text);
+                TotalCostTextBox.Text = totalCost.ToString("C");
             }
         }
 
@@ -264,16 +259,11 @@ namespace zxc
         }
         private void WarehouseListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (WarehouseListView.SelectedItem is Warehouse selectedWarehouse)
-            {
-                selectedWarehouseId = selectedWarehouse.ID_warehouse;
-                MessageBox.Show($"Выбран склад: {selectedWarehouseId}");
-                UpdateTotalCost();
-            }
+
         }
         private void AddSupplyOrder_Click(object sender, RoutedEventArgs e)
         {
-            // Предполагается, что вы уже получаете значения для других полей
+            // Проверка на валидность введенных данных
             if (selectedMaterialId == -1 || selectedWarehouseId == -1 || selectedProviderId == -1 ||
                 DateOrderPicker.SelectedDate == null ||
                 DateArrivalPicker.SelectedDate == null ||
@@ -286,7 +276,7 @@ namespace zxc
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("INSERT INTO Supply_order (ID_Provider, ID_material, total_cost, Date_order, Date_arrival, Status, Warehouse) VALUES (@ID_Provider, @ID_material, @total_cost, @Date_order, @Date_arrival, @Status, @Warehouse)", connection))
+                using (SqlCommand command = new SqlCommand("INSERT INTO Supply_order (ID_Provider, ID_material, total_cost, Date_order, Date_arrival, Status, Warehouse, Quantity_of_material) VALUES (@ID_Provider, @ID_material, @total_cost, @Date_order, @Date_arrival, @Status, @Warehouse, @Quantity_of_material)", connection))
                 {
                     command.Parameters.AddWithValue("@ID_Provider", selectedProviderId);
                     command.Parameters.AddWithValue("@ID_material", selectedMaterialId);
@@ -294,16 +284,26 @@ namespace zxc
                     command.Parameters.AddWithValue("@Date_order", DateOrderPicker.SelectedDate.Value);
                     command.Parameters.AddWithValue("@Date_arrival", DateArrivalPicker.SelectedDate.Value);
                     command.Parameters.AddWithValue("@Status", StatusTextBox.Text);
-                    command.Parameters.AddWithValue("@Warehouse", selectedWarehouseId); // Убедитесь, что вы добавляете это значение
-
+                    command.Parameters.AddWithValue("@Warehouse", selectedWarehouseId); // Передаем id склада
+                    command.Parameters.AddWithValue("@Quantity_of_material", Quantity_of_materials.Text);
                     command.ExecuteNonQuery();
+
                 }
 
+                // Здесь мы убираем Convert.ToInt32()
+                var Warehouse = ADO.ZXCZXCZXC.dbo.Warehouse.FirstOrDefault(A => A.ID_warehouse == selectedWarehouseId);
+                if (Warehouse != null)
+                {
+                    Warehouse.Quantity_of_material -= Convert.ToInt32(Quantity_of_materials.Text); // Обновляем количество материала
+                    ZXCZXCZXC.dbo.SaveChanges();
+                    LoadWarehouses();
+                }
             }
 
             // Обновление списка заказов
             LoadSupplyOrders();
         }
+        
         private void DeleteSupplyOrderButton_Click(object sender, RoutedEventArgs e)
         {
             if (PostavkaListView.SelectedItem is SupplyOrder selectedOrder)
@@ -326,6 +326,10 @@ namespace zxc
             {
                 MessageBox.Show("Пожалуйста, выберите заказ для удаления.");
             }
+        }
+        private void QuantityTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            UpdateTotalCost();
         }
     }
 }

@@ -22,6 +22,7 @@ namespace zxc.ADO
         public Nullable<System.DateTime> Date_arrival { get; set; }
         public string Status { get; set; }
         public Nullable<int> Warehouse { get; set; }
+        public Nullable<int> Quantity_of_material { get; set; }
     
         public virtual Materials Materials { get; set; }
         public virtual Provider Provider { get; set; }

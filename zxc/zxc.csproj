@@ -73,52 +73,52 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ADO\Category.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\construction_site.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\inventory.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\Klient.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\klient_Order.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\Logistika.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\Materials.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\mIGR.Context.cs">
+    <Compile Include="ADO\Migr.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mIGR.Context.tt</DependentUpon>
+      <DependentUpon>Migr.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\mIGR.cs">
+    <Compile Include="ADO\Migr.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
-    <Compile Include="ADO\mIGR.Designer.cs">
+    <Compile Include="ADO\Migr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mIGR.edmx</DependentUpon>
+      <DependentUpon>Migr.edmx</DependentUpon>
     </Compile>
     <Compile Include="ADO\Provider.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\Supply_order.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\sysdiagrams.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\Warehouse.cs">
-      <DependentUpon>mIGR.tt</DependentUpon>
+      <DependentUpon>Migr.tt</DependentUpon>
     </Compile>
     <Compile Include="ADO\ZXCZXCZXC.cs" />
     <Compile Include="MaterialsCRUD.xaml.cs">
@@ -208,12 +208,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ADO\mIGR.edmx">
+    <EntityDeploy Include="ADO\Migr.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>mIGR.Designer.cs</LastGenOutput>
+      <LastGenOutput>Migr.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ADO\mIGR.edmx.diagram">
-      <DependentUpon>mIGR.edmx</DependentUpon>
+    <None Include="ADO\Migr.edmx.diagram">
+      <DependentUpon>Migr.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -224,17 +224,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="ADO\mIGR.Context.tt">
+    <Content Include="ADO\Migr.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>mIGR.edmx</DependentUpon>
-      <LastGenOutput>mIGR.Context.cs</LastGenOutput>
+      <DependentUpon>Migr.edmx</DependentUpon>
+      <LastGenOutput>Migr.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ADO\mIGR.tt">
+    <Content Include="ADO\Migr.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>mIGR.edmx</DependentUpon>
-      <LastGenOutput>mIGR.cs</LastGenOutput>
+      <DependentUpon>Migr.edmx</DependentUpon>
+      <LastGenOutput>Migr.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
