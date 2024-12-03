@@ -8,7 +8,7 @@ namespace zxc.ADO
 {
     internal class ZXCZXCZXC
     {
-        public static string ConnectionString = "Server=DESKTOP-LQ2LR6H\\MSSQLSERVER01;Database=Строй Компания И закупка материалов;Integrated Security=True;";
+        public static string ConnectionString = "Server=sql-ser-larisa\\serv1215;Database=Строй Компания И закупка материалов;Integrated Security=True;";
         public static Строй_Компания_И_закупка_материаловEntities dbo = new Строй_Компания_И_закупка_материаловEntities();
         public static Klient klient;
         public static klient_Order klient_Order;

@@ -29,6 +29,6 @@
         <Label Content="Количество материала" HorizontalAlignment="Left" Height="30" Margin="298,287,0,0" VerticalAlignment="Top" Width="136"/>
         <Label Content="Адресс" HorizontalAlignment="Left" Height="30" Margin="496,288,0,0" VerticalAlignment="Top" Width="63"/>
         <Button x:Name="addbuttonclickWH" Content="Добавить" Width="75" Margin="543,350,182,0" VerticalAlignment="Top" Click="AddButton_Click"/>
-        <Button Content="Редактировать" Margin="446,350,265,0" VerticalAlignment="Top" Click="EditButton_Click"/>
+        <Button Content="Редактировать" Margin="423,380,288,0" VerticalAlignment="Top" Click="EditButton_Click"/>
     </Grid>
 </Page>

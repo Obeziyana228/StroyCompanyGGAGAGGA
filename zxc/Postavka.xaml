@@ -1,0 +1,87 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:zxc"
+      x:Class="zxc.Reestr"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1670"
+      Title="Reestr">
+
+    <StackPanel Margin="10">
+        <!-- Label и ListView для материалов -->
+        <Label Content="Материалы" FontWeight="Bold" Margin="0,0,0,5"/>
+        <ListView x:Name="MaterialsListView" SelectionChanged="MaterialsListView_SelectionChanged" Margin="0,0,0,10" Height="91">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID_Materials}" Width="50"/>
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name_Maerials}" Width="150"/>
+                    <GridViewColumn Header="Категория" DisplayMemberBinding="{Binding Сategory}" Width="100"/>
+                    <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding purchase_price}" Width="75"/>
+                    <GridViewColumn Header="Цена продажи" DisplayMemberBinding="{Binding sale_price}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Label и ListView для поставщиков -->
+        <Label Content="Поставщики" FontWeight="Bold" Margin="0,0,0,5"/>
+        <ListView x:Name="ProvidersListView" Height="88" SelectionChanged="ProvidersListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID_Postavshik}" Width="50"/>
+                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Name_Postavshik}" Width="150"/>
+                    <GridViewColumn Header="Надежность" DisplayMemberBinding="{Binding reliability}" Width="150"/>
+                    <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding phone}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Label и ListView для склада -->
+        <Label Content="Склад" FontWeight="Bold" Margin="0,0,0,5"/>
+        <ListView x:Name="WarehouseListView" SelectionChanged="WarehouseListView_SelectionChanged" Margin="0,0,0,10" Height="102">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID_warehouse}" Width="50"/>
+                    <GridViewColumn Header="ID материала" DisplayMemberBinding="{Binding ID_material}" Width="100"/>
+                    <GridViewColumn Header="Количество" DisplayMemberBinding="{Binding Quantity_of_material}" Width="100"/>
+                    <GridViewColumn Header="Адрес" DisplayMemberBinding="{Binding Adress}" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Поля ввода для новой таблицы -->
+        <Label Content="Общая стоимость" FontWeight="Bold" Margin="0,0,0,5"/>
+        <TextBox x:Name="TotalCostTextBox" IsReadOnly="True" Margin="0,0,0,10"/>
+
+        <Label Content="Дата заказа" FontWeight="Bold" Margin="0,0,0,5"/>
+        <DatePicker x:Name="DateOrderPicker" Margin="0,0,0,10"/>
+
+        <Label Content="Дата прибытия" FontWeight="Bold" Margin="0,0,0,5"/>
+        <DatePicker x:Name="DateArrivalPicker" Margin="0,0,0,10"/>
+
+        <Label Content="Статус" FontWeight="Bold" Margin="0,0,0,5"/>
+        <TextBox x:Name="StatusTextBox" Margin="0,0,0,10"/>
+
+        <Button Content="Добавить" Click="AddSupplyOrder_Click" Width="75" Margin="0,0,0,10"/>
+        <Button x:Name="DeleteSupplyOrderButton" Content="Удалить" Click="DeleteSupplyOrderButton_Click" Width="82" />
+
+        <!-- Label и ListView для Supply_order -->
+        <Label Content="Заказы поставок" FontWeight="Bold" Margin="0,0,0,5"/>
+        <ListView x:Name="PostavkaListView" Height="200">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID_supply}" Width="50"/>
+                    <GridViewColumn Header="Поставщик" DisplayMemberBinding="{Binding ID_Provider}" Width="100"/>
+                    <GridViewColumn Header="Материал" DisplayMemberBinding="{Binding ID_material}" Width="100"/>
+                    <GridViewColumn Header="Общая стоимость" DisplayMemberBinding="{Binding total_cost}" Width="100"/>
+                    <GridViewColumn Header="Дата заказа" DisplayMemberBinding="{Binding Date_order}" Width="100"/>
+                    <GridViewColumn Header="Дата прибытия" DisplayMemberBinding="{Binding Date_arrival}" Width="100"/>
+                    <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                    <GridViewColumn Header="ID Склада" DisplayMemberBinding="{Binding Warehouse}" Width="100"/>
+                    <!-- Новый столбец для ID_warehouse -->
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
+</Page>

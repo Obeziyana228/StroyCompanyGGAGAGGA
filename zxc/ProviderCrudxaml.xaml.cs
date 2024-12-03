@@ -23,7 +23,7 @@ namespace zxc
     /// </summary>
     public partial class ProviderCrudxaml : Page
     {
-        private string connectionString = "Server=DESKTOP-LQ2LR6H\\MSSQLSERVER01;Database=Строй Компания И закупка материалов;Integrated Security=True;";
+        private string connectionString = "Server=sql-ser-larisa\\serv1215;Database=Строй Компания И закупка материалов;Integrated Security=True;";
         private DataTable ProviderTable;
 
         public ProviderCrudxaml()
